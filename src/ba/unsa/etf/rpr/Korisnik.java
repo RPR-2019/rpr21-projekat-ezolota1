@@ -3,11 +3,13 @@ package ba.unsa.etf.rpr;
 public class Korisnik {
     private int id;
     private String ime, prezime;
+    private Uloga uloga;
 
-    public Korisnik(int id, String ime, String prezime) {
+    public Korisnik(int id, String ime, String prezime, Uloga uloga) {
         this.id = id;
         this.ime = ime;
         this.prezime = prezime;
+        this.uloga=uloga;
     }
 
     public int getId() {
@@ -32,5 +34,13 @@ public class Korisnik {
 
     public void setPrezime(String prezime) {
         this.prezime = prezime;
+    }
+
+    public Uloga getUloga() {
+        return uloga;
+    }
+
+    public void setUloga(Uloga uloga) {
+        this.uloga = uloga;
     }
 }

@@ -7,6 +7,7 @@ public class Racun {
     private double novacZaUplatu;
     private Brojilo brojilo;
     private Date datum;
+    private boolean placen;
 
     public Racun(int id, double novacZaUplatu, Brojilo brojilo, Date datum) {
         this.id = id;
@@ -45,5 +46,13 @@ public class Racun {
 
     public void setDatum(Date datum) {
         this.datum = datum;
+    }
+
+    public boolean isPlacen() {
+        return placen;
+    }
+
+    public void setPlacen(boolean placen) {
+        this.placen = placen;
     }
 }
