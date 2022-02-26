@@ -46,17 +46,17 @@
    <center>
       <VBox prefHeight="206.0" prefWidth="155.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="TOP_CENTER" contentDisplay="CENTER" text="Pozdrav!" />
+            <Label fx:id="pozdravLabel" alignment="TOP_CENTER" contentDisplay="CENTER" text="Pozdrav!" />
             <HBox spacing="5.0">
                <children>
                   <Label text="Broj brojila:" />
-                  <ChoiceBox prefHeight="26.0" prefWidth="85.0" />
+                  <ChoiceBox fx:id="brojilaChoice" prefHeight="26.0" prefWidth="85.0" />
                </children>
             </HBox>
             <TextField fx:id="fldText" editable="false" maxWidth="-Infinity" prefWidth="150.0" />
-            <Button alignment="CENTER" contentDisplay="TOP" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" text="Potvrdi potrošnju plina" />
-            <Button maxWidth="-Infinity" mnemonicParsing="false" prefWidth="150.0" text="Račun" />
-            <Button maxWidth="-Infinity" mnemonicParsing="false" prefWidth="150.0" text="Dugovanja" />
+            <Button alignment="CENTER" contentDisplay="TOP" maxWidth="-Infinity" mnemonicParsing="false" onAction="#potrosnjaAction" prefHeight="26.0" prefWidth="150.0" text="Potvrdi potrošnju plina" />
+            <Button maxWidth="-Infinity" mnemonicParsing="false" onAction="#racunAction" prefWidth="150.0" text="Račun" />
+            <Button maxWidth="-Infinity" mnemonicParsing="false" onAction="#dugovanjaAction" prefWidth="150.0" text="Dugovanja" />
          </children>
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

@@ -2,8 +2,11 @@ package ba.unsa.etf.rpr;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -13,6 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import static javafx.scene.layout.Region.USE_PREF_SIZE;
 
@@ -21,6 +25,7 @@ public class LoginController {
     public Button loginBtn;
     public TextField korisnickoImeFld;
     public PasswordField lozinkaFld;
+    private Korisnik k;
 
     public LoginController() {
         dao = PlinDAO.getInstance();
@@ -62,7 +67,7 @@ public class LoginController {
             greska=true;
         }
         if(greska) return false;
-        Korisnik k=dao.dajKorisnika(korisnickoImeFld.getText());
+        k=dao.dajKorisnika(korisnickoImeFld.getText());
         if(k==null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Greška");
@@ -88,11 +93,25 @@ public class LoginController {
         if(verifikacija() == true) {
 
             Stage myStage = new Stage();
-            FXMLLoader ldr = new FXMLLoader(getClass().getResource("/fxml/usersConsumers.fxml"));
-            Controller gc = new Controller();
-            ldr.setController(gc);
-            Parent p =(Parent) ldr.load();
-            myStage.setTitle("Grad");
+            Parent p=null;
+            if(k.getUloga().equals(Uloga.POTROSAC)) {
+                FXMLLoader ldr = new FXMLLoader(getClass().getResource("/fxml/usersConsumers.fxml"));
+                ArrayList<Integer> brojila = new ArrayList<>();
+                brojila.addAll(dao.dajBrojila(korisnickoImeFld.getText()));
+                ObservableList<Integer> brojilaObs = FXCollections.observableArrayList(brojila);
+                Controller gc = new Controller(korisnickoImeFld.getText(), brojilaObs);
+                ldr.setController(gc);
+                p = (Parent) ldr.load();
+            } else if(k.getUloga().equals(Uloga.POPISIVAC)) {
+                FXMLLoader ldr = new FXMLLoader(getClass().getResource("/fxml/usersEmployees.fxml"));
+                ArrayList<Integer> brojila = new ArrayList<>();
+                brojila.addAll(dao.dajNepopisanaBrojila());
+                ObservableList<Integer> brojilaObs = FXCollections.observableArrayList(brojila);
+                EmployeesController gc = new EmployeesController(korisnickoImeFld.getText(), brojilaObs);
+                ldr.setController(gc);
+                p = (Parent) ldr.load();
+            }
+            myStage.setTitle("Popisivanje plina");
             myStage.setScene(new Scene(p, USE_PREF_SIZE, USE_PREF_SIZE));
 /*
             myStage.setOnHiding(x -> {
@@ -107,7 +126,8 @@ public class LoginController {
 
 
             myStage.show();
-
+            Stage stage = (Stage) lozinkaFld.getScene().getWindow();
+            stage.close();
         }
     }
 }

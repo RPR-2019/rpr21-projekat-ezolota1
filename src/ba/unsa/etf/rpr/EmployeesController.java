@@ -10,7 +10,7 @@ import javafx.scene.control.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class Controller implements Initializable {
+public class EmployeesController implements Initializable {
     private PlinDAO dao;
     public TextField fldText;
     public Label pozdravLabel;
@@ -27,7 +27,7 @@ public class Controller implements Initializable {
     }
 
 
-    public Controller(String korisnickoIme, ObservableList<Integer> brojila) {
+    public EmployeesController(String korisnickoIme, ObservableList<Integer> brojila) {
         this.korisnickoIme=korisnickoIme;
         dao = PlinDAO.getInstance();
         this.brojila=brojila;
@@ -59,15 +59,5 @@ public class Controller implements Initializable {
         }
     }
 
-    public void racunAction(ActionEvent event) {
-        String value = ((Button)event.getSource()).getText();
-        if(result.get().equals("0")) result.set(value);
-        else result.set(result.get() + value);
-    }
 
-    public void dugovanjaAction(ActionEvent event) {
-        String value = ((Button)event.getSource()).getText();
-        if(result.get().equals("0")) result.set(value);
-        else result.set(result.get() + value);
-    }
 }
