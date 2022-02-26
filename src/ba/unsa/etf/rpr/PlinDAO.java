@@ -12,7 +12,8 @@ public class PlinDAO {
     private Connection conn;
     private PreparedStatement ps, dajBrojilaOdIstogKorisnikaStatement, postaviStanjeStatement,
     dajNeocitanaBrojilaStatement, dajRacuneStatement, dajBrojiloStatement, dajBrojilaStatement,
-    dodajRacunStatement, odrediIDRacunuStatement, odrediIDKorisnikuStatement, dodajKorisnikaStatement;
+    dodajRacunStatement, odrediIDRacunuStatement, odrediIDKorisnikuStatement, dodajKorisnikaStatement,
+    dajKorisnikeStatement, dodajBrojiloStatement;
 
     public static PlinDAO getInstance() {
         if (instance == null) instance = new PlinDAO();
@@ -38,6 +39,8 @@ public class PlinDAO {
             odrediIDRacunuStatement = conn.prepareStatement("SELECT id FROM racun");
             odrediIDKorisnikuStatement = conn.prepareStatement("SELECT id FROM korisnik");
             dodajKorisnikaStatement = conn.prepareStatement("INSERT INTO korisnik VALUES(?,?,?,?,?,?)");
+            dajKorisnikeStatement = conn.prepareStatement("SELECT id, ime, prezime, korisnicko_ime, lozinka, uloga FROM korisnik WHERE uloga=?");
+            dodajBrojiloStatement = conn.prepareStatement("INSERT INTO brojilo VALUES(?,?,?,?,?)");
         } catch (SQLException e) {
             regenerisiBazu();
             try {
@@ -226,6 +229,35 @@ public class PlinDAO {
             if(k.getUloga().equals(Uloga.POTROSAC)) dodajKorisnikaStatement.setString(6, "POTROSAC");
             else dodajKorisnikaStatement.setString(6, "POPISIVAC");
             dodajKorisnikaStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public ArrayList<Korisnik> korisnici() {
+        ArrayList<Korisnik> korisnici=new ArrayList<>();
+        try {
+            dajKorisnikeStatement.setString(1, "POTROSAC");
+            ResultSet rs=dajKorisnikeStatement.executeQuery();
+            while(rs.next()) {
+                Korisnik k=new Korisnik(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), Uloga.POTROSAC);
+                korisnici.add(k);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return korisnici;
+    }
+
+    public void dodajBrojilo(Brojilo b) {
+        try {
+            dodajBrojiloStatement.setInt(1, b.getSifraBrojila());
+            dodajBrojiloStatement.setInt(2, b.getTrenutnoStanje());
+            dodajBrojiloStatement.setString(3, b.getHod());
+            dodajBrojiloStatement.setInt(4, b.getVlasnik().getId());
+            dodajBrojiloStatement.setInt(5, 0);
+
+            dodajBrojiloStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }

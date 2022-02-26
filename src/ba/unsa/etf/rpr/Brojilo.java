@@ -9,6 +9,14 @@ public class Brojilo {
 
     public Brojilo() {}
 
+    public Brojilo(int sifraBrojila, int trenutnoStanje, String hod, Korisnik vlasnik, boolean ocitano) {
+        this.sifraBrojila = sifraBrojila;
+        this.trenutnoStanje = trenutnoStanje;
+        this.hod = hod;
+        this.vlasnik = vlasnik;
+        this.ocitano = ocitano;
+    }
+
     public Brojilo(int sifraBrojila, int trenutnoStanje, String hod, int ocitano) {
         this.sifraBrojila = sifraBrojila;
         this.trenutnoStanje = trenutnoStanje;

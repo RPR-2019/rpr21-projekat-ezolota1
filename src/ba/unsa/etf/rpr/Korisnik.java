@@ -70,4 +70,9 @@ public class Korisnik {
     public void setUloga(Uloga uloga) {
         this.uloga = uloga;
     }
+
+    @Override
+    public String toString() {
+        return id + ", " + ime + " " + prezime;
+    }
 }

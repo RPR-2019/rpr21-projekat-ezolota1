@@ -83,26 +83,28 @@ public class AdminController {
             }
         });
         myStage.show();
-
-
     }
 
 
 
     public void dodajBrojiloAction(ActionEvent event) throws IOException {
-        /*
-        izabraniGrad=(Grad) tableViewGradovi.getSelectionModel().getSelectedItem();
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        Optional<ButtonType> result = alert.showAndWait();
-        if(!result.isPresent() || result.get() != ButtonType.OK) {
-            return;
-        } else {
-            dao.obrisiGrad(izabraniGrad);
-            tableViewGradovi.setItems(dao.gradove());
-            tableViewGradovi.refresh();
-        }
 
-         */
+        Stage myStage = new Stage();
+        FXMLLoader ldr = new FXMLLoader(getClass().getResource("/fxml/brojilo.fxml"));
+        BrojiloController gc = new BrojiloController(dao.korisnici());
+        ldr.setController(gc);
+        Parent p =(Parent) ldr.load();
+        myStage.setTitle("Brojilo");
+        myStage.setScene(new Scene(p, USE_PREF_SIZE, USE_PREF_SIZE));
+        myStage.setOnHiding(x -> {
+            Brojilo b=gc.getBrojilo();
+            if(b!=null) {
+                dao.dodajBrojilo(b);
+            }
+        });
+        myStage.show();
+
+
     }
 
     public void izvjestajBrojilaAction(ActionEvent event) throws IOException {
