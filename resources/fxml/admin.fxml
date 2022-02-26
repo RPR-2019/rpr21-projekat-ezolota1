@@ -21,8 +21,7 @@
         <VBox prefHeight="400.0" prefWidth="127.0" spacing="5.0" BorderPane.alignment="CENTER">
             <children>
                 <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#dodajRacunAction" text="Dodaj račun" />
-                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#dodajPotrosacaAction" text="Dodaj potrošača" />
-                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#dodajPopisivacaAction" text="Dodaj popisivača" />
+                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#dodajKorisnikaAction" text="Dodaj korisnika" />
                 <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#dodajBrojiloAction" text="Dodaj brojilo" />
                 <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#izvjestajBrojilaAction" text="Brojila" />
                 <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#izvjestajKorisniciAction" text="Korisnici" />

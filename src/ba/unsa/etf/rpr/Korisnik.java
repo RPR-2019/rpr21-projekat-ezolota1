@@ -31,6 +31,14 @@ public class Korisnik {
         this.lozinka=lozinka;
     }
 
+    public Korisnik(String ime, String prezime, String korisnickoIme, String lozinka, Uloga uloga) {
+        this.ime = ime;
+        this.prezime = prezime;
+        this.uloga=uloga;
+        this.korisnickoIme=korisnickoIme;
+        this.lozinka=lozinka;
+    }
+
     public int getId() {
         return id;
     }

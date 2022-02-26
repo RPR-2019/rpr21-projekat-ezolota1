@@ -45,76 +45,49 @@ public class AdminController {
     }
 
     public void dodajRacunAction(ActionEvent event) throws IOException {
-        /*
+
         Stage myStage = new Stage();
-        FXMLLoader ldr = new FXMLLoader(getClass().getResource("/fxml/drzava.fxml"));
-        DrzavaController dc = new DrzavaController(null, dao.gradovi());
+        FXMLLoader ldr = new FXMLLoader(getClass().getResource("/fxml/racun.fxml"));
+        RacunController dc = new RacunController(dao.brojila());
         ldr.setController(dc);
         Parent p =(Parent) ldr.load();
-        myStage.setTitle("Država");
+        myStage.setTitle("Račun");
         myStage.setScene(new Scene(p, USE_PREF_SIZE, USE_PREF_SIZE));
         myStage.setOnHiding(x -> {
-            Drzava d=dc.getDrzava();
-            if(d!=null) {
-                dao.dodajDrzavu(d);
-            }
-        });
-        myStage.show();
-
-         */
-    }
-
-    public void dodajPotrosacaAction(ActionEvent event) throws IOException {
-        /*
-        Stage myStage = new Stage();
-        FXMLLoader ldr = new FXMLLoader(getClass().getResource("/fxml/grad.fxml"));
-        GradController gc = new GradController(null, dao.drzave());
-        ldr.setController(gc);
-        Parent p =(Parent) ldr.load();
-        myStage.setTitle("Grad");
-        myStage.setScene(new Scene(p, USE_PREF_SIZE, USE_PREF_SIZE));
-        myStage.setOnHiding(x -> {
-            Grad noviGrad=gc.getGrad();
-            if(noviGrad!=null) {
-                dao.dodajGrad(noviGrad);
+            Racun r=dc.getRacun();
+            r.setId(dao.odrediIdRacuna());
+            if(r!=null) {
+                dao.dodajRacun(r);
                 posebna();
             }
         });
         myStage.show();
 
-         */
+
     }
 
-    public void dodajPopisivacaAction(ActionEvent event) throws IOException {
-        /*
-        izabraniGrad=(Grad) tableViewGradovi.getSelectionModel().getSelectedItem();
-        if(izabraniGrad!=null) {
-            Stage myStage = new Stage();
-            FXMLLoader ldr = new FXMLLoader(getClass().getResource("/fxml/grad.fxml"));
+    public void dodajKorisnikaAction(ActionEvent event) throws IOException {
 
-            GradController gc = new GradController(izabraniGrad, dao.drzave());
-            ldr.setController(gc);
+        Stage myStage = new Stage();
+        FXMLLoader ldr = new FXMLLoader(getClass().getResource("/fxml/korisnik.fxml"));
+        KorisnikController gc = new KorisnikController();
+        ldr.setController(gc);
+        Parent p =(Parent) ldr.load();
+        myStage.setTitle("Korisnik");
+        myStage.setScene(new Scene(p, USE_PREF_SIZE, USE_PREF_SIZE));
+        myStage.setOnHiding(x -> {
+            Korisnik noviKorisnik=gc.getKorisnik();
+            if(noviKorisnik!=null) {
+                noviKorisnik.setId(dao.odrediIdKorisnika());
+                dao.dodajKorisnika(noviKorisnik);
+            }
+        });
+        myStage.show();
 
-            Parent p = (Parent) ldr.load();
 
-            myStage.setTitle("Grad");
-            myStage.setScene(new Scene(p, USE_PREF_SIZE, USE_PREF_SIZE));
-            myStage.setOnHiding(x -> {
-
-                Grad novi = gc.getGrad();
-                if (novi != null) {
-
-                    System.out.println(izabraniGrad.getNaziv());
-                    dao.izmijeniGrad(novi);
-                    posebna();
-                }
-            });
-
-            myStage.show();
-        }
-
-         */
     }
+
+
 
     public void dodajBrojiloAction(ActionEvent event) throws IOException {
         /*

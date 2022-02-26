@@ -20,6 +20,14 @@ public class Racun {
         else this.placen=false;
     }
 
+    public Racun(String novacZaUplatu, Brojilo brojilo, String mjesec, int godina, boolean placen) {
+        this.novacZaUplatu = novacZaUplatu;
+        this.brojilo = brojilo;
+        this.mjesec = mjesec;
+        this.godina = godina;
+        this.placen = placen;
+    }
+
     public int getId() {
         return id;
     }

@@ -11,7 +11,8 @@ public class PlinDAO {
     private static PlinDAO instance;
     private Connection conn;
     private PreparedStatement ps, dajBrojilaOdIstogKorisnikaStatement, postaviStanjeStatement,
-    dajNeocitanaBrojilaStatement, dajRacuneStatement, dajBrojiloStatement;
+    dajNeocitanaBrojilaStatement, dajRacuneStatement, dajBrojiloStatement, dajBrojilaStatement,
+    dodajRacunStatement, odrediIDRacunuStatement, odrediIDKorisnikuStatement, dodajKorisnikaStatement;
 
     public static PlinDAO getInstance() {
         if (instance == null) instance = new PlinDAO();
@@ -32,6 +33,11 @@ public class PlinDAO {
             dajNeocitanaBrojilaStatement = conn.prepareStatement("SELECT sifra, stanje, hod, vlasnik, popisano FROM brojilo WHERE popisano=0");
             dajRacuneStatement = conn.prepareStatement("SELECT id, novac_za_uplatu, mjesec, godina, brojilo, placen FROM racun");
             dajBrojiloStatement = conn.prepareStatement("SELECT sifra, stanje, hod, vlasnik, popisano FROM brojilo WHERE sifra=?");
+            dajBrojilaStatement = conn.prepareStatement("SELECT sifra, stanje, hod, vlasnik, popisano FROM brojilo");
+            dodajRacunStatement = conn.prepareStatement("INSERT INTO racun VALUES(?,?,?,?,?,?)");
+            odrediIDRacunuStatement = conn.prepareStatement("SELECT id FROM racun");
+            odrediIDKorisnikuStatement = conn.prepareStatement("SELECT id FROM korisnik");
+            dodajKorisnikaStatement = conn.prepareStatement("INSERT INTO korisnik VALUES(?,?,?,?,?,?)");
         } catch (SQLException e) {
             regenerisiBazu();
             try {
@@ -156,5 +162,72 @@ public class PlinDAO {
         }
 
         return racuni;
+    }
+
+    public ArrayList<Brojilo> brojila() {
+        ArrayList<Brojilo> brojila = new ArrayList<>();
+        try {
+            ResultSet rs=dajBrojilaStatement.executeQuery();
+            while(rs.next()) {
+                Brojilo b=new Brojilo(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getInt(5));
+                brojila.add(b);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return brojila;
+    }
+
+    public void dodajRacun(Racun r) {
+        try {
+            dodajRacunStatement.setInt(1, r.getId());
+            dodajRacunStatement.setString(2, r.getNovacZaUplatu());
+            dodajRacunStatement.setString(3, r.getMjesec());
+            dodajRacunStatement.setInt(4, r.getGodina());
+            dodajRacunStatement.setInt(5, r.getBrojilo().getSifraBrojila());
+            if(r.isPlacen()) dodajRacunStatement.setInt(6, 1);
+            else dodajRacunStatement.setInt(6, 0);
+            dodajRacunStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public int odrediIdRacuna() {
+        int id=0;
+        try {
+            ResultSet rs=odrediIDRacunuStatement.executeQuery();
+            while(rs.next()) id=rs.getInt(1);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return id+1;
+    }
+
+    public int odrediIdKorisnika() {
+        int id=0;
+        try {
+            ResultSet rs=odrediIDKorisnikuStatement.executeQuery();
+            while(rs.next()) id=rs.getInt(1);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return id+1;
+    }
+
+    public void dodajKorisnika(Korisnik k) {
+        try {
+            dodajKorisnikaStatement.setInt(1, k.getId());
+            dodajKorisnikaStatement.setString(2, k.getIme());
+            dodajKorisnikaStatement.setString(3, k.getPrezime());
+            dodajKorisnikaStatement.setString(4, k.getKorisnickoIme());
+            dodajKorisnikaStatement.setString(5, k.getLozinka());
+            if(k.getUloga().equals(Uloga.POTROSAC)) dodajKorisnikaStatement.setString(6, "POTROSAC");
+            else dodajKorisnikaStatement.setString(6, "POPISIVAC");
+            dodajKorisnikaStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
