@@ -11,7 +11,7 @@ public class PlinDAO {
     private static PlinDAO instance;
     private Connection conn;
     private PreparedStatement ps, dajBrojilaOdIstogKorisnikaStatement, postaviStanjeStatement,
-    dajNeocitanaBrojilaStatement;
+    dajNeocitanaBrojilaStatement, dajRacuneStatement, dajBrojiloStatement;
 
     public static PlinDAO getInstance() {
         if (instance == null) instance = new PlinDAO();
@@ -30,6 +30,8 @@ public class PlinDAO {
             dajBrojilaOdIstogKorisnikaStatement = conn.prepareStatement("SELECT sifra, stanje, hod, vlasnik, popisano FROM brojilo WHERE vlasnik=?");
             postaviStanjeStatement = conn.prepareStatement("UPDATE brojilo SET stanje=?, popisano=1 WHERE sifra=?");
             dajNeocitanaBrojilaStatement = conn.prepareStatement("SELECT sifra, stanje, hod, vlasnik, popisano FROM brojilo WHERE popisano=0");
+            dajRacuneStatement = conn.prepareStatement("SELECT id, novac_za_uplatu, mjesec, godina, brojilo, placen FROM racun");
+            dajBrojiloStatement = conn.prepareStatement("SELECT sifra, stanje, hod, vlasnik, popisano FROM brojilo WHERE sifra=?");
         } catch (SQLException e) {
             regenerisiBazu();
             try {
@@ -121,5 +123,38 @@ public class PlinDAO {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public Brojilo dajBrojilo(int sifra) throws SQLException {
+        Brojilo brojilo = new Brojilo();
+        dajBrojiloStatement.setInt(1, sifra);
+        ResultSet rs=dajBrojiloStatement.executeQuery();
+        if(!rs.next()) return null;
+        brojilo.setSifraBrojila(rs.getInt(1));
+        brojilo.setTrenutnoStanje(rs.getInt(2));
+        brojilo.setHod(rs.getString(3));
+        //brojilo.setVlasnik(null);
+        if(rs.getInt(5)==1) brojilo.setOcitano(true);
+        else brojilo.setOcitano(false);
+        return brojilo;
+    }
+
+    public ArrayList<Racun> racuni() {
+        ArrayList<Racun> racuni=new ArrayList<>();
+        try {
+            ResultSet rs=dajRacuneStatement.executeQuery();
+            while(rs.next()) {
+                System.out.println("Iznos:" + rs.getString(2));
+                Racun racun=new Racun(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), null, rs.getInt(6));
+                Brojilo brojilo=dajBrojilo(rs.getInt(5));
+                racun.setBrojilo(brojilo);
+                racuni.add(racun);
+
+            }
+         } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return racuni;
     }
 }

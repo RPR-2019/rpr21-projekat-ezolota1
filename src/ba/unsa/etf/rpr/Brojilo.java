@@ -3,13 +3,18 @@ package ba.unsa.etf.rpr;
 public class Brojilo {
     private int sifraBrojila;
     private int trenutnoStanje;
-    private Hod hod;
+    private String hod;
     private Korisnik vlasnik;
+    private boolean ocitano;
 
-    public Brojilo(int sifraBrojila, int trenutnoStanje, Hod hod) {
+    public Brojilo() {}
+
+    public Brojilo(int sifraBrojila, int trenutnoStanje, String hod, int ocitano) {
         this.sifraBrojila = sifraBrojila;
         this.trenutnoStanje = trenutnoStanje;
         this.hod=hod;
+        if(ocitano==1) this.ocitano=true;
+        else this.ocitano=false;
     }
 
     public int getSifraBrojila() {
@@ -28,11 +33,11 @@ public class Brojilo {
         this.trenutnoStanje = trenutnoStanje;
     }
 
-    public Hod getHod() {
+    public String getHod() {
         return hod;
     }
 
-    public void setHod(Hod hod) {
+    public void setHod(String hod) {
         this.hod = hod;
     }
 
@@ -42,5 +47,18 @@ public class Brojilo {
 
     public void setVlasnik(Korisnik vlasnik) {
         this.vlasnik = vlasnik;
+    }
+
+    public boolean isOcitano() {
+        return ocitano;
+    }
+
+    public void setOcitano(boolean ocitano) {
+        this.ocitano = ocitano;
+    }
+
+    @Override
+    public String toString() {
+        return ((Integer) sifraBrojila).toString();
     }
 }

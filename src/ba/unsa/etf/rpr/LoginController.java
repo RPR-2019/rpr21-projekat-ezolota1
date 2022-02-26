@@ -110,6 +110,12 @@ public class LoginController {
                 EmployeesController gc = new EmployeesController(korisnickoImeFld.getText(), brojilaObs);
                 ldr.setController(gc);
                 p = (Parent) ldr.load();
+            } else {
+                FXMLLoader ldr = new FXMLLoader(getClass().getResource("/fxml/admin.fxml"));
+
+                AdminController gc = new AdminController();
+                ldr.setController(gc);
+                p = (Parent) ldr.load();
             }
             myStage.setTitle("Popisivanje plina");
             myStage.setScene(new Scene(p, USE_PREF_SIZE, USE_PREF_SIZE));

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
+    <center>
+        <TableView fx:id="tableViewRacuni" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="556.0" BorderPane.alignment="CENTER">
+            <columns>
+                <TableColumn fx:id="colRacunid" prefWidth="61.19999539852142" text="ID" />
+                <TableColumn fx:id="colRacunIznos" prefWidth="65.80000305175781" text="Iznos" />
+                <TableColumn fx:id="colRacunMjesec" minWidth="3.20001220703125" prefWidth="92.19998168945312" text="Mjesec" />
+                <TableColumn fx:id="colRacunGodina" maxWidth="1.7976931348623157E308" minWidth="0.0" prefWidth="93.79998779296875" text="Godina" />
+                <TableColumn fx:id="colRacunBrojilo" minWidth="3.20001220703125" prefWidth="94.60000610351562" text="Brojilo" />
+                <TableColumn fx:id="colRacunPlacen" minWidth="3.20001220703125" prefWidth="61.600018310546886" text="Plaćen" />
+            </columns>
+        </TableView>
+    </center>
+    <right>
+        <VBox prefHeight="400.0" prefWidth="127.0" spacing="5.0" BorderPane.alignment="CENTER">
+            <children>
+                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#dodajRacunAction" text="Dodaj račun" />
+                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#dodajPotrosacaAction" text="Dodaj potrošača" />
+                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#dodajPopisivacaAction" text="Dodaj popisivača" />
+                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#dodajBrojiloAction" text="Dodaj brojilo" />
+                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#izvjestajBrojilaAction" text="Brojila" />
+                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#izvjestajKorisniciAction" text="Korisnici" />
+            </children>
+            <padding>
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            </padding>
+        </VBox>
+    </right>
+</BorderPane>

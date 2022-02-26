@@ -4,18 +4,20 @@ import java.util.Date;
 
 public class Racun {
     private int id;
-    private double novacZaUplatu;
+    private String novacZaUplatu;
     private Brojilo brojilo;
     private String mjesec;
     private int godina;
     private boolean placen;
 
-    public Racun(int id, double novacZaUplatu, Brojilo brojilo, String mjesec, int godina) {
+    public Racun(int id, String novacZaUplatu, String mjesec, int godina, Brojilo brojilo, int placen) {
         this.id = id;
         this.novacZaUplatu = novacZaUplatu;
         this.brojilo = brojilo;
         this.mjesec=mjesec;
         this.godina=godina;
+        if(placen==1) this.placen=true;
+        else this.placen=false;
     }
 
     public int getId() {
@@ -26,11 +28,11 @@ public class Racun {
         this.id = id;
     }
 
-    public double getNovacZaUplatu() {
+    public String getNovacZaUplatu() {
         return novacZaUplatu;
     }
 
-    public void setNovacZaUplatu(double novacZaUplatu) {
+    public void setNovacZaUplatu(String novacZaUplatu) {
         this.novacZaUplatu = novacZaUplatu;
     }
 
