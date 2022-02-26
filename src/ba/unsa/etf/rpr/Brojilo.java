@@ -4,7 +4,7 @@ public class Brojilo {
     private int sifraBrojila;
     private int trenutnoStanje;
     private Hod hod;
-    private Korisnik vlasnik;
+    private Potrosac vlasnik;
 
     public Brojilo(int sifraBrojila, int trenutnoStanje, Hod hod) {
         this.sifraBrojila = sifraBrojila;
@@ -40,7 +40,7 @@ public class Brojilo {
         return vlasnik;
     }
 
-    public void setVlasnik(Korisnik vlasnik) {
+    public void setVlasnik(Potrosac vlasnik) {
         this.vlasnik = vlasnik;
     }
 }

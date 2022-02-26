@@ -21,7 +21,7 @@ public class PlinDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-/*
+
         try {
             ps = conn.prepareStatement("SELECT grad.id, grad.naziv, grad.broj_stanovnika, grad.drzava FROM grad, drzava WHERE grad.drzava=drzava.id AND drzava.naziv=?");
         } catch (SQLException e) {
@@ -35,7 +35,7 @@ public class PlinDAO {
 
     }
 
- */
+
 
 
 }

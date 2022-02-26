@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<?import java.net.URL?>
+<GridPane hgap="5.0" prefHeight="144.0" prefWidth="266.0" vgap="5.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.LoginController">
+   <stylesheets>
+      <URL value="@/css/verification.css" />
+   </stylesheets>
+
+   <columnConstraints>
+      <ColumnConstraints maxWidth="251.2" minWidth="100.59999237060546" prefWidth="100.59999237060546" />
+      <ColumnConstraints maxWidth="190.60000762939453" minWidth="0.0" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints maxHeight="24.6" minHeight="16.6" prefHeight="16.6" />
+      <RowConstraints maxHeight="16.199999999999996" minHeight="8.199999999999996" prefHeight="16.199999999999996" />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+   </rowConstraints>
+   <children>
+      <Label text="Aplikacija za popisivanje plina" GridPane.columnSpan="2" />
+      <Label text="Molimo da unesete svoje korisničko ime i lozinku." GridPane.columnSpan="2" GridPane.rowIndex="1">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
+      <Label prefHeight="18.0" prefWidth="137.0" text="Korisničko ime: " GridPane.rowIndex="2" />
+      <TextField fx:id="korisnickoImeFld" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <Label text="Lozinka: " GridPane.rowIndex="3" />
+      <PasswordField fx:id="lozinkaFld" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      <Button fx:id="loginBtn" mnemonicParsing="false" onAction="#loginAction" text="Login" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+   </children>
+   <opaqueInsets>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </opaqueInsets>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
+</GridPane>
