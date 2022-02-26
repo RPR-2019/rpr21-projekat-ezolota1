@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -16,10 +17,14 @@ import java.io.IOException;
 import static javafx.scene.layout.Region.USE_PREF_SIZE;
 
 public class LoginController {
-
+    private PlinDAO dao;
     public Button loginBtn;
     public TextField korisnickoImeFld;
     public PasswordField lozinkaFld;
+
+    public LoginController() {
+        dao = PlinDAO.getInstance();
+    }
 
     private boolean verifikacija() {
         boolean greska=false;
@@ -57,6 +62,25 @@ public class LoginController {
             greska=true;
         }
         if(greska) return false;
+        Korisnik k=dao.dajKorisnika(korisnickoImeFld.getText());
+        if(k==null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Greška");
+            alert.setHeaderText("Nepostojeći korisnik");
+
+            alert.setResizable(false);
+            alert.showAndWait();
+            return false;
+        }
+        if(!k.getLozinka().equals(lozinkaFld.getText())) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Greška");
+            alert.setHeaderText("Pogrešna lozinka");
+
+            alert.setResizable(false);
+            alert.showAndWait();
+            return false;
+        }
         return true;
     }
 

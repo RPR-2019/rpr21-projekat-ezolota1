@@ -1,15 +1,34 @@
 package ba.unsa.etf.rpr;
 
-public abstract class Korisnik {
+public class Korisnik {
     private int id;
     private String ime, prezime;
+    String korisnickoIme, lozinka;
     private Uloga uloga;
 
-    public Korisnik(int id, String ime, String prezime, Uloga uloga) {
+    public String getKorisnickoIme() {
+        return korisnickoIme;
+    }
+
+    public void setKorisnickoIme(String korisnickoIme) {
+        this.korisnickoIme = korisnickoIme;
+    }
+
+    public String getLozinka() {
+        return lozinka;
+    }
+
+    public void setLozinka(String lozinka) {
+        this.lozinka = lozinka;
+    }
+
+    public Korisnik(int id, String ime, String prezime, String korisnickoIme, String lozinka, Uloga uloga) {
         this.id = id;
         this.ime = ime;
         this.prezime = prezime;
         this.uloga=uloga;
+        this.korisnickoIme=korisnickoIme;
+        this.lozinka=lozinka;
     }
 
     public int getId() {

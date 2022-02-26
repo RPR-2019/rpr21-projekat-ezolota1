@@ -6,14 +6,16 @@ public class Racun {
     private int id;
     private double novacZaUplatu;
     private Brojilo brojilo;
-    private Date datum;
+    private String mjesec;
+    private int godina;
     private boolean placen;
 
-    public Racun(int id, double novacZaUplatu, Brojilo brojilo, Date datum) {
+    public Racun(int id, double novacZaUplatu, Brojilo brojilo, String mjesec, int godina) {
         this.id = id;
         this.novacZaUplatu = novacZaUplatu;
         this.brojilo = brojilo;
-        this.datum = datum;
+        this.mjesec=mjesec;
+        this.godina=godina;
     }
 
     public int getId() {
@@ -40,12 +42,20 @@ public class Racun {
         this.brojilo = brojilo;
     }
 
-    public Date getDatum() {
-        return datum;
+    public String getMjesec() {
+        return mjesec;
     }
 
-    public void setDatum(Date datum) {
-        this.datum = datum;
+    public void setMjesec(String mjesec) {
+        this.mjesec = mjesec;
+    }
+
+    public int getGodina() {
+        return godina;
+    }
+
+    public void setGodina(int godina) {
+        this.godina = godina;
     }
 
     public boolean isPlacen() {
