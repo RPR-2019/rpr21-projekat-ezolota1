@@ -23,8 +23,9 @@
                 <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#dodajRacunAction" text="Dodaj račun" />
                 <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#dodajKorisnikaAction" text="Dodaj korisnika" />
                 <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#dodajBrojiloAction" text="Dodaj brojilo" />
-                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#izvjestajBrojilaAction" text="Brojila" />
-                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#izvjestajKorisniciAction" text="Korisnici" />
+            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#izvjestajRacuniAction" text="Izvještaj računi" />
+                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#izvjestajBrojilaAction" text="Izvještaj brojila" />
+                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#izvjestajKorisniciAction" text="Izvještaj korisnici" />
             </children>
             <padding>
                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

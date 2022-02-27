@@ -20,6 +20,8 @@ public class PlinDAO {
         return instance;
     }
 
+    public Connection getConnection() { return conn; }
+
     private PlinDAO() {
         try {
             conn = DriverManager.getConnection("jdbc:sqlite:baza.db");

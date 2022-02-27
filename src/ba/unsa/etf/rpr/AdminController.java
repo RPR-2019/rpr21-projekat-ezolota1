@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import net.sf.jasperreports.engine.JRException;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -107,54 +108,30 @@ public class AdminController {
 
     }
 
-    public void izvjestajBrojilaAction(ActionEvent event) throws IOException {
-        /*
+    public void izvjestajRacuniAction(ActionEvent event) throws IOException {
+
         try {
-            new GradoviReport().showReport(dao.getConnection());
+            new IzvjestajRacuni().showReport(dao.getConnection());
         } catch (JRException e1) {
             e1.printStackTrace();
         }
 
-         */
+
     }
 
-    public void izvjestajKorisniciAction(ActionEvent event) throws IOException {
-        /*
-        String jezici[] = { "Bosanski", "Engleski", "Njemački", "Francuski" };
-        ChoiceDialog d = new ChoiceDialog(jezici[1], jezici);
-        // setheader text
-        d.setHeaderText("Jezik");
-
-        // set content text
-        d.setContentText("Odaberite željeni jezik: ");
-
-        // show the dialog
-        Optional<ButtonType> result = d.showAndWait();
-        System.out.println(d.getSelectedItem());
-
-        if(!result.isPresent()) {
-            return;
-        } else {
-            ResourceBundle bundle = ResourceBundle.getBundle("Translation_bs");
-
-            if(d.getSelectedItem().toString().equals("Engleski")) {
-                bundle = ResourceBundle.getBundle("Translation_en_US");
-
-            } else if(d.getSelectedItem().toString().equals("Njemački")) {
-
-                bundle = ResourceBundle.getBundle("Translation_de");
-            } else if(d.getSelectedItem().toString().equals("Francuski")) {
-                bundle = ResourceBundle.getBundle("Translation_fr");
-            }
-            btnDodajDrzavu.setText(bundle.getString("dodajDrzavu"));
-            btnDodajGrad.setText(bundle.getString("dodajGrad"));
-            btnIzmijeniGrad.setText(bundle.getString("izmijeniGrad"));
-            btnObrisiGrad.setText(bundle.getString("obrisiGrad"));
-            btnStampa.setText(bundle.getString("stampa"));
-            btnJezik.setText(bundle.getString("jezik"));
+    public void izvjestajBrojilaAction(ActionEvent event) throws IOException {
+        try {
+            new IzvjestajBrojila().showReport(dao.getConnection());
+        } catch (JRException e1) {
+            e1.printStackTrace();
         }
     }
 
-         */
+    public void izvjestajKorisniciAction(ActionEvent event) throws IOException {
+        try {
+            new IzvjestajKorisnici().showReport(dao.getConnection());
+        } catch (JRException e1) {
+            e1.printStackTrace();
+        }
     }
 }
