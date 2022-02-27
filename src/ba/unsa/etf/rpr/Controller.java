@@ -6,8 +6,10 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import net.sf.jasperreports.engine.JRException;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
@@ -60,14 +62,31 @@ public class Controller implements Initializable {
     }
 
     public void racunAction(ActionEvent event) {
-        String value = ((Button)event.getSource()).getText();
-        if(result.get().equals("0")) result.set(value);
-        else result.set(result.get() + value);
+        IzvjestajPosljRacun r=new IzvjestajPosljRacun();
+        r.setBrojilo(brojilaChoice.getSelectionModel().getSelectedItem().toString());
+        try {
+            r.showReport(dao.getConnection());
+        } catch (JRException e1) {
+            e1.printStackTrace();
+        }
     }
 
     public void dugovanjaAction(ActionEvent event) {
-        String value = ((Button)event.getSource()).getText();
-        if(result.get().equals("0")) result.set(value);
-        else result.set(result.get() + value);
+        ArrayList<Racun> dugovanja=dao.dugovanja(brojilaChoice.getSelectionModel().getSelectedItem());
+        if(dugovanja.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Nepostojeća dugovanja");
+            alert.setHeaderText("Trenutno nemate nikakvih dugovanja");
+
+            alert.show();
+        } else {
+            IzvjestajDugovanja r=new IzvjestajDugovanja();
+            r.setBrojilo(brojilaChoice.getSelectionModel().getSelectedItem().toString());
+            try {
+                r.showReport(dao.getConnection());
+            } catch (JRException e1) {
+                e1.printStackTrace();
+            }
+        }
     }
 }

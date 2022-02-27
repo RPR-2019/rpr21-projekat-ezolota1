@@ -13,7 +13,7 @@ public class PlinDAO {
     private PreparedStatement ps, dajBrojilaOdIstogKorisnikaStatement, postaviStanjeStatement,
     dajNeocitanaBrojilaStatement, dajRacuneStatement, dajBrojiloStatement, dajBrojilaStatement,
     dodajRacunStatement, odrediIDRacunuStatement, odrediIDKorisnikuStatement, dodajKorisnikaStatement,
-    dajKorisnikeStatement, dodajBrojiloStatement;
+    dajKorisnikeStatement, dodajBrojiloStatement, dajDugovanjaStatement;
 
     public static PlinDAO getInstance() {
         if (instance == null) instance = new PlinDAO();
@@ -43,6 +43,7 @@ public class PlinDAO {
             dodajKorisnikaStatement = conn.prepareStatement("INSERT INTO korisnik VALUES(?,?,?,?,?,?)");
             dajKorisnikeStatement = conn.prepareStatement("SELECT id, ime, prezime, korisnicko_ime, lozinka, uloga FROM korisnik WHERE uloga=?");
             dodajBrojiloStatement = conn.prepareStatement("INSERT INTO brojilo VALUES(?,?,?,?,?)");
+            dajDugovanjaStatement = conn.prepareStatement("SELECT id, id, novac_za_uplatu, mjesec, godina, brojilo, placen FROM racun WHERE placen=0 AND brojilo=?");
         } catch (SQLException e) {
             regenerisiBazu();
             try {
@@ -155,7 +156,7 @@ public class PlinDAO {
         try {
             ResultSet rs=dajRacuneStatement.executeQuery();
             while(rs.next()) {
-                System.out.println("Iznos:" + rs.getString(2));
+
                 Racun racun=new Racun(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), null, rs.getInt(6));
                 Brojilo brojilo=dajBrojilo(rs.getInt(5));
                 racun.setBrojilo(brojilo);
@@ -263,5 +264,24 @@ public class PlinDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public ArrayList<Racun> dugovanja(Integer b) {
+
+        ArrayList<Racun> dugovanja=new ArrayList<>();
+        try {
+            dajDugovanjaStatement.setInt(1, b);
+            ResultSet rs=dajDugovanjaStatement.executeQuery();
+            while(rs.next()) {
+                Racun racun=new Racun(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), null, rs.getInt(6));
+                Brojilo brojilo=dajBrojilo(rs.getInt(5));
+                racun.setBrojilo(brojilo);
+                dugovanja.add(racun);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return dugovanja;
     }
 }
