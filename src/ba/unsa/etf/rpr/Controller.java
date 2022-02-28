@@ -137,4 +137,16 @@ public class Controller implements Initializable {
         dugovanjaButton.setText(bundle.getString("dugovanja"));
     }
 
+    public void logOutAction (ActionEvent actionEvent) throws IOException {
+        Stage myStage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/login.fxml"));
+        myStage.setTitle("Login");
+        myStage.setScene(new Scene(root, USE_PREF_SIZE, USE_PREF_SIZE));
+        myStage.show();
+
+        Stage stage = (Stage) pozdravLabel.getScene().getWindow();
+        stage.close();
+
+    }
+
 }

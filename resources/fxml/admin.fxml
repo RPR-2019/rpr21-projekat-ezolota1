@@ -47,6 +47,7 @@
             <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#izvjestajRacuniAction" text="Izvještaj računi" />
                 <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#izvjestajBrojilaAction" text="Izvještaj brojila" />
                 <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#izvjestajKorisniciAction" text="Izvještaj korisnici" />
+                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#logOutAction" text="Log Out" />
             </children>
             <padding>
                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -67,6 +68,8 @@
                         <MenuItem onAction="#akcijaAbout" text="_About" />
                     </items>
                 </Menu>
+
+
             </menus>
         </MenuBar>
     </top>

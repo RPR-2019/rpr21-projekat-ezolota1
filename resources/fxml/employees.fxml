@@ -55,6 +55,7 @@
                 </HBox>
                 <TextField fx:id="fldText" editable="false" maxWidth="-Infinity" prefWidth="150.0" />
                 <Button fx:id="potvrdiButton" alignment="CENTER" contentDisplay="TOP" maxWidth="-Infinity" mnemonicParsing="false" onAction="#potrosnjaAction" prefHeight="26.0" prefWidth="150.0" text="%potvrdiPotrosnju" />
+                <Button alignment="CENTER" contentDisplay="TOP" maxWidth="-Infinity" mnemonicParsing="false" onAction="#logOutAction" prefHeight="26.0" prefWidth="150.0" text="Log Out" />
 
             </children>
             <padding>

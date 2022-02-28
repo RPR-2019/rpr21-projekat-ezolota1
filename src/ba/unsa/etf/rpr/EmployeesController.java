@@ -103,4 +103,16 @@ public class EmployeesController implements Initializable {
         potvrdiButton.setText(bundle.getString("potvrdiPotrosnju"));
 
     }
+
+    public void logOutAction (ActionEvent actionEvent) throws IOException {
+        Stage myStage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/login.fxml"));
+        myStage.setTitle("Login");
+        myStage.setScene(new Scene(root, USE_PREF_SIZE, USE_PREF_SIZE));
+        myStage.show();
+
+        Stage stage = (Stage) pozdravLabel.getScene().getWindow();
+        stage.close();
+
+    }
 }
