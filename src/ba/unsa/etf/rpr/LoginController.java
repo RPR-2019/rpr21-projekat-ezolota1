@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 import static javafx.scene.layout.Region.USE_PREF_SIZE;
 
@@ -95,7 +96,11 @@ public class LoginController {
             Stage myStage = new Stage();
             Parent p=null;
             if(k.getUloga().equals(Uloga.POTROSAC)) {
-                FXMLLoader ldr = new FXMLLoader(getClass().getResource("/fxml/usersConsumers.fxml"));
+                ResourceBundle bundle = ResourceBundle.getBundle("Translation_bs");
+                FXMLLoader ldr = new FXMLLoader( getClass().getResource(
+                        "/fxml/usersConsumers.fxml" ), bundle);
+
+                //FXMLLoader ldr = new FXMLLoader(getClass().getResource("/fxml/usersConsumers.fxml"));
                 ArrayList<Integer> brojila = new ArrayList<>();
                 brojila.addAll(dao.dajBrojila(korisnickoImeFld.getText()));
                 ObservableList<Integer> brojilaObs = FXCollections.observableArrayList(brojila);
@@ -103,7 +108,10 @@ public class LoginController {
                 ldr.setController(gc);
                 p = (Parent) ldr.load();
             } else if(k.getUloga().equals(Uloga.POPISIVAC)) {
-                FXMLLoader ldr = new FXMLLoader(getClass().getResource("/fxml/usersEmployees.fxml"));
+                ResourceBundle bundle = ResourceBundle.getBundle("Translation_bs");
+                FXMLLoader ldr = new FXMLLoader( getClass().getResource(
+                        "/fxml/usersEmployees.fxml" ), bundle);
+                //FXMLLoader ldr = new FXMLLoader(getClass().getResource("/fxml/usersEmployees.fxml"));
                 ArrayList<Integer> brojila = new ArrayList<>();
                 brojila.addAll(dao.dajNepopisanaBrojila());
                 ObservableList<Integer> brojilaObs = FXCollections.observableArrayList(brojila);

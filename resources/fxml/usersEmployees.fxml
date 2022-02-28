@@ -49,12 +49,12 @@
                 <Label fx:id="pozdravLabel" alignment="TOP_CENTER" contentDisplay="CENTER" text="Pozdrav!" />
                 <HBox spacing="5.0">
                     <children>
-                        <Label text="Broj brojila:" />
-                        <ChoiceBox fx:id="brojilaChoice" prefHeight="26.0" prefWidth="85.0" />
+                        <Label fx:id="brojBrojilaLabel" prefWidth="79.0" text="%brojBrojila" />
+                        <ChoiceBox fx:id="brojilaChoice" prefHeight="26.0" prefWidth="67.0" />
                     </children>
                 </HBox>
                 <TextField fx:id="fldText" editable="false" maxWidth="-Infinity" prefWidth="150.0" />
-                <Button alignment="CENTER" contentDisplay="TOP" maxWidth="-Infinity" mnemonicParsing="false" onAction="#potrosnjaAction" prefHeight="26.0" prefWidth="150.0" text="Potvrdi potrošnju plina" />
+                <Button fx:id="potvrdiButton" alignment="CENTER" contentDisplay="TOP" maxWidth="-Infinity" mnemonicParsing="false" onAction="#potrosnjaAction" prefHeight="26.0" prefWidth="150.0" text="%potvrdiPotrosnju" />
 
             </children>
             <padding>
@@ -62,4 +62,28 @@
             </padding>
         </VBox>
     </center>
+    <top>
+        <MenuBar BorderPane.alignment="CENTER">
+            <menus>
+                <Menu mnemonicParsing="true" text="_File">
+                    <items>
+                        <MenuItem onAction="#akcijaKraj" text="E_xit" />
+                    </items>
+                </Menu>
+
+                <Menu text="_Help">
+                    <items>
+                        <MenuItem onAction="#akcijaAbout" text="_About" />
+                    </items>
+                </Menu>
+
+                <Menu text="Language">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#akcijaBosanski" text="Bosanski" />
+                        <MenuItem mnemonicParsing="false" onAction="#akcijaEngleski" text="English" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
 </BorderPane>
