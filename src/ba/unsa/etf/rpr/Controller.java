@@ -9,11 +9,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import net.sf.jasperreports.engine.JRException;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -22,7 +20,7 @@ import java.util.ResourceBundle;
 import static javafx.scene.layout.Region.USE_PREF_SIZE;
 
 public class Controller implements Initializable {
-    private PlinDAO dao;
+    private GasDAO dao;
     public TextField fldText;
     public Label pozdravLabel, brojBrojilaLabel;
     private String korisnickoIme;
@@ -41,7 +39,7 @@ public class Controller implements Initializable {
 
     public Controller(String korisnickoIme, ObservableList<Integer> brojila) {
         this.korisnickoIme=korisnickoIme;
-        dao = PlinDAO.getInstance();
+        dao = GasDAO.getInstance();
         this.brojila=brojila;
     }
 
@@ -72,7 +70,7 @@ public class Controller implements Initializable {
     }
 
     public void racunAction(ActionEvent event) {
-        IzvjestajPosljRacun r=new IzvjestajPosljRacun();
+        ReportLastBill r=new ReportLastBill();
         r.setBrojilo(brojilaChoice.getSelectionModel().getSelectedItem().toString());
         try {
             r.showReport(dao.getConnection());
@@ -82,7 +80,7 @@ public class Controller implements Initializable {
     }
 
     public void dugovanjaAction(ActionEvent event) {
-        ArrayList<Racun> dugovanja=dao.dugovanja(brojilaChoice.getSelectionModel().getSelectedItem());
+        ArrayList<Bill> dugovanja=dao.dugovanja(brojilaChoice.getSelectionModel().getSelectedItem());
         if(dugovanja.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Nepostojeća dugovanja");
@@ -90,7 +88,7 @@ public class Controller implements Initializable {
 
             alert.show();
         } else {
-            IzvjestajDugovanja r=new IzvjestajDugovanja();
+            ReportDepts r=new ReportDepts();
             r.setBrojilo(brojilaChoice.getSelectionModel().getSelectedItem().toString());
             try {
                 r.showReport(dao.getConnection());

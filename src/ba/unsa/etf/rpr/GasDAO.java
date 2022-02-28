@@ -4,25 +4,24 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Scanner;
 
-public class PlinDAO {
-    private static PlinDAO instance;
+public class GasDAO {
+    private static GasDAO instance;
     private Connection conn;
     private PreparedStatement ps, dajBrojilaOdIstogKorisnikaStatement, postaviStanjeStatement,
     dajNeocitanaBrojilaStatement, dajRacuneStatement, dajBrojiloStatement, dajBrojilaStatement,
     dodajRacunStatement, odrediIDRacunuStatement, odrediIDKorisnikuStatement, dodajKorisnikaStatement,
     dajKorisnikeStatement, dodajBrojiloStatement, dajDugovanjaStatement;
 
-    public static PlinDAO getInstance() {
-        if (instance == null) instance = new PlinDAO();
+    public static GasDAO getInstance() {
+        if (instance == null) instance = new GasDAO();
         return instance;
     }
 
     public Connection getConnection() { return conn; }
 
-    private PlinDAO() {
+    private GasDAO() {
         try {
             conn = DriverManager.getConnection("jdbc:sqlite:baza.db");
         } catch (SQLException e) {
@@ -80,14 +79,14 @@ public class PlinDAO {
         }
     }
 
-    public Korisnik dajKorisnika(String korisnickoIme) {
+    public User dajKorisnika(String korisnickoIme) {
         try {
             ps.setString(1, korisnickoIme);
             ResultSet rs = ps.executeQuery();
             if(!rs.next()) return null;
-            Korisnik korisnik = new Korisnik(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), Uloga.POTROSAC);
-            if(rs.getString(6).equals("POPISIVAC")) korisnik.setUloga(Uloga.POPISIVAC);
-            if(rs.getString(6).equals("ADMIN")) korisnik.setUloga(Uloga.ADMIN);
+            User korisnik = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), Role.POTROSAC);
+            if(rs.getString(6).equals("POPISIVAC")) korisnik.setUloga(Role.POPISIVAC);
+            if(rs.getString(6).equals("ADMIN")) korisnik.setUloga(Role.ADMIN);
             return korisnik;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -96,7 +95,7 @@ public class PlinDAO {
     }
 
     public ArrayList<Integer> dajBrojila(String korisnickoIme) {
-        Korisnik k=dajKorisnika(korisnickoIme);
+        User k=dajKorisnika(korisnickoIme);
         try {
             dajBrojilaOdIstogKorisnikaStatement.setInt(1, k.getId());
             ResultSet rs = dajBrojilaOdIstogKorisnikaStatement.executeQuery();
@@ -137,8 +136,8 @@ public class PlinDAO {
         return null;
     }
 
-    public Brojilo dajBrojilo(int sifra) throws SQLException {
-        Brojilo brojilo = new Brojilo();
+    public Counter dajBrojilo(int sifra) throws SQLException {
+        Counter brojilo = new Counter();
         dajBrojiloStatement.setInt(1, sifra);
         ResultSet rs=dajBrojiloStatement.executeQuery();
         if(!rs.next()) return null;
@@ -151,14 +150,14 @@ public class PlinDAO {
         return brojilo;
     }
 
-    public ArrayList<Racun> racuni() {
-        ArrayList<Racun> racuni=new ArrayList<>();
+    public ArrayList<Bill> racuni() {
+        ArrayList<Bill> racuni=new ArrayList<>();
         try {
             ResultSet rs=dajRacuneStatement.executeQuery();
             while(rs.next()) {
 
-                Racun racun=new Racun(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), null, rs.getInt(6));
-                Brojilo brojilo=dajBrojilo(rs.getInt(5));
+                Bill racun=new Bill(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), null, rs.getInt(6));
+                Counter brojilo=dajBrojilo(rs.getInt(5));
                 racun.setBrojilo(brojilo);
                 racuni.add(racun);
 
@@ -170,12 +169,12 @@ public class PlinDAO {
         return racuni;
     }
 
-    public ArrayList<Brojilo> brojila() {
-        ArrayList<Brojilo> brojila = new ArrayList<>();
+    public ArrayList<Counter> brojila() {
+        ArrayList<Counter> brojila = new ArrayList<>();
         try {
             ResultSet rs=dajBrojilaStatement.executeQuery();
             while(rs.next()) {
-                Brojilo b=new Brojilo(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getInt(5));
+                Counter b=new Counter(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getInt(5));
                 brojila.add(b);
             }
         } catch (SQLException e) {
@@ -185,7 +184,7 @@ public class PlinDAO {
         return brojila;
     }
 
-    public void dodajRacun(Racun r) {
+    public void dodajRacun(Bill r) {
         try {
             dodajRacunStatement.setInt(1, r.getId());
             dodajRacunStatement.setString(2, r.getNovacZaUplatu());
@@ -222,14 +221,14 @@ public class PlinDAO {
         return id+1;
     }
 
-    public void dodajKorisnika(Korisnik k) {
+    public void dodajKorisnika(User k) {
         try {
             dodajKorisnikaStatement.setInt(1, k.getId());
             dodajKorisnikaStatement.setString(2, k.getIme());
             dodajKorisnikaStatement.setString(3, k.getPrezime());
             dodajKorisnikaStatement.setString(4, k.getKorisnickoIme());
             dodajKorisnikaStatement.setString(5, k.getLozinka());
-            if(k.getUloga().equals(Uloga.POTROSAC)) dodajKorisnikaStatement.setString(6, "POTROSAC");
+            if(k.getUloga().equals(Role.POTROSAC)) dodajKorisnikaStatement.setString(6, "POTROSAC");
             else dodajKorisnikaStatement.setString(6, "POPISIVAC");
             dodajKorisnikaStatement.executeUpdate();
         } catch (SQLException e) {
@@ -237,13 +236,13 @@ public class PlinDAO {
         }
     }
 
-    public ArrayList<Korisnik> korisnici() {
-        ArrayList<Korisnik> korisnici=new ArrayList<>();
+    public ArrayList<User> korisnici() {
+        ArrayList<User> korisnici=new ArrayList<>();
         try {
             dajKorisnikeStatement.setString(1, "POTROSAC");
             ResultSet rs=dajKorisnikeStatement.executeQuery();
             while(rs.next()) {
-                Korisnik k=new Korisnik(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), Uloga.POTROSAC);
+                User k=new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), Role.POTROSAC);
                 korisnici.add(k);
             }
         } catch (SQLException e) {
@@ -252,7 +251,7 @@ public class PlinDAO {
         return korisnici;
     }
 
-    public void dodajBrojilo(Brojilo b) {
+    public void dodajBrojilo(Counter b) {
         try {
             dodajBrojiloStatement.setInt(1, b.getSifraBrojila());
             dodajBrojiloStatement.setInt(2, b.getTrenutnoStanje());
@@ -266,15 +265,15 @@ public class PlinDAO {
         }
     }
 
-    public ArrayList<Racun> dugovanja(Integer b) {
+    public ArrayList<Bill> dugovanja(Integer b) {
 
-        ArrayList<Racun> dugovanja=new ArrayList<>();
+        ArrayList<Bill> dugovanja=new ArrayList<>();
         try {
             dajDugovanjaStatement.setInt(1, b);
             ResultSet rs=dajDugovanjaStatement.executeQuery();
             while(rs.next()) {
-                Racun racun=new Racun(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), null, rs.getInt(6));
-                Brojilo brojilo=dajBrojilo(rs.getInt(5));
+                Bill racun=new Bill(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), null, rs.getInt(6));
+                Counter brojilo=dajBrojilo(rs.getInt(5));
                 racun.setBrojilo(brojilo);
                 dugovanja.add(racun);
             }

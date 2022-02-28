@@ -7,20 +7,18 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
 
-public class RacunController {
+public class BillController {
     public TextField iznosFld, godinaFld;
-    public Racun racun;
-    public ChoiceBox<Brojilo> choiceBrojilo;
+    public Bill racun;
+    public ChoiceBox<Counter> choiceBrojilo;
     public ChoiceBox<String> choiceMjesec;
-    ObservableList<Brojilo> brojila= FXCollections.observableArrayList();
+    ObservableList<Counter> brojila= FXCollections.observableArrayList();
     private boolean iznosIspravan=false;
 
 
-    public RacunController(ArrayList<Brojilo> brojila) {
+    public BillController(ArrayList<Counter> brojila) {
         this.brojila.addAll(brojila);
     }
 
@@ -55,12 +53,12 @@ public class RacunController {
             iznosIspravan=true;
         }
         if(iznosIspravan) {
-            racun=new Racun(iznosFld.getText(), choiceBrojilo.getSelectionModel().getSelectedItem(), choiceMjesec.getSelectionModel().getSelectedItem(), Integer.parseInt(godinaFld.getText()), false);
+            racun=new Bill(iznosFld.getText(), choiceBrojilo.getSelectionModel().getSelectedItem(), choiceMjesec.getSelectionModel().getSelectedItem(), Integer.parseInt(godinaFld.getText()), false);
             Stage stage = (Stage) iznosFld.getScene().getWindow();
             stage.close();
         }
 
     }
 
-    public Racun getRacun() { return racun; }
+    public Bill getRacun() { return racun; }
 }

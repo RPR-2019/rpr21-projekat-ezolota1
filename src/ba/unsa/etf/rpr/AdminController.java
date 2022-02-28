@@ -12,8 +12,6 @@ import javafx.stage.Stage;
 import net.sf.jasperreports.engine.JRException;
 
 import java.io.IOException;
-import java.util.Optional;
-import java.util.ResourceBundle;
 
 import static javafx.scene.layout.Region.USE_PREF_SIZE;
 
@@ -25,9 +23,9 @@ public class AdminController {
     public TableColumn colRacunGodina;
     public TableColumn colRacunBrojilo;
     public TableColumn colRacunPlacen;
-    public Racun izabraniRacun;
+    public Bill izabraniRacun;
 
-    PlinDAO dao = PlinDAO.getInstance();
+    GasDAO dao = GasDAO.getInstance();
 
     public void initialize() {
         posebna();
@@ -35,27 +33,27 @@ public class AdminController {
     }
 
     private void posebna() {
-        ObservableList<Racun> racuni = FXCollections.observableList(dao.racuni());
-        colRacunid.setCellValueFactory(new PropertyValueFactory<Racun, Integer>("id"));
-        colRacunIznos.setCellValueFactory(new PropertyValueFactory<Racun, String>("novacZaUplatu"));
-        colRacunMjesec.setCellValueFactory(new PropertyValueFactory<Racun, String>("mjesec"));
-        colRacunGodina.setCellValueFactory(new PropertyValueFactory<Racun, Integer>("godina"));
-        colRacunBrojilo.setCellValueFactory(new PropertyValueFactory<Racun, Brojilo>("brojilo"));
-        colRacunPlacen.setCellValueFactory(new PropertyValueFactory<Racun, Integer>("placen"));
+        ObservableList<Bill> racuni = FXCollections.observableList(dao.racuni());
+        colRacunid.setCellValueFactory(new PropertyValueFactory<Bill, Integer>("id"));
+        colRacunIznos.setCellValueFactory(new PropertyValueFactory<Bill, String>("novacZaUplatu"));
+        colRacunMjesec.setCellValueFactory(new PropertyValueFactory<Bill, String>("mjesec"));
+        colRacunGodina.setCellValueFactory(new PropertyValueFactory<Bill, Integer>("godina"));
+        colRacunBrojilo.setCellValueFactory(new PropertyValueFactory<Bill, Counter>("brojilo"));
+        colRacunPlacen.setCellValueFactory(new PropertyValueFactory<Bill, Integer>("placen"));
         tableViewRacuni.setItems(racuni);
     }
 
     public void dodajRacunAction(ActionEvent event) throws IOException {
 
         Stage myStage = new Stage();
-        FXMLLoader ldr = new FXMLLoader(getClass().getResource("/fxml/racun.fxml"));
-        RacunController dc = new RacunController(dao.brojila());
+        FXMLLoader ldr = new FXMLLoader(getClass().getResource("/fxml/bill.fxml"));
+        BillController dc = new BillController(dao.brojila());
         ldr.setController(dc);
         Parent p =(Parent) ldr.load();
         myStage.setTitle("Račun");
         myStage.setScene(new Scene(p, USE_PREF_SIZE, USE_PREF_SIZE));
         myStage.setOnHiding(x -> {
-            Racun r=dc.getRacun();
+            Bill r=dc.getRacun();
             r.setId(dao.odrediIdRacuna());
             if(r!=null) {
                 dao.dodajRacun(r);
@@ -70,14 +68,14 @@ public class AdminController {
     public void dodajKorisnikaAction(ActionEvent event) throws IOException {
 
         Stage myStage = new Stage();
-        FXMLLoader ldr = new FXMLLoader(getClass().getResource("/fxml/korisnik.fxml"));
-        KorisnikController gc = new KorisnikController();
+        FXMLLoader ldr = new FXMLLoader(getClass().getResource("/fxml/user.fxml"));
+        UserController gc = new UserController();
         ldr.setController(gc);
         Parent p =(Parent) ldr.load();
         myStage.setTitle("Korisnik");
         myStage.setScene(new Scene(p, USE_PREF_SIZE, USE_PREF_SIZE));
         myStage.setOnHiding(x -> {
-            Korisnik noviKorisnik=gc.getKorisnik();
+            User noviKorisnik=gc.getKorisnik();
             if(noviKorisnik!=null) {
                 noviKorisnik.setId(dao.odrediIdKorisnika());
                 dao.dodajKorisnika(noviKorisnik);
@@ -91,14 +89,14 @@ public class AdminController {
     public void dodajBrojiloAction(ActionEvent event) throws IOException {
 
         Stage myStage = new Stage();
-        FXMLLoader ldr = new FXMLLoader(getClass().getResource("/fxml/brojilo.fxml"));
-        BrojiloController gc = new BrojiloController(dao.korisnici());
+        FXMLLoader ldr = new FXMLLoader(getClass().getResource("/fxml/counter.fxml"));
+        CounterController gc = new CounterController(dao.korisnici());
         ldr.setController(gc);
         Parent p =(Parent) ldr.load();
         myStage.setTitle("Brojilo");
         myStage.setScene(new Scene(p, USE_PREF_SIZE, USE_PREF_SIZE));
         myStage.setOnHiding(x -> {
-            Brojilo b=gc.getBrojilo();
+            Counter b=gc.getBrojilo();
             if(b!=null) {
                 dao.dodajBrojilo(b);
             }
@@ -111,7 +109,7 @@ public class AdminController {
     public void izvjestajRacuniAction(ActionEvent event) throws IOException {
 
         try {
-            new IzvjestajRacuni().showReport(dao.getConnection());
+            new ReportBills().showReport(dao.getConnection());
         } catch (JRException e1) {
             e1.printStackTrace();
         }
@@ -121,7 +119,7 @@ public class AdminController {
 
     public void izvjestajBrojilaAction(ActionEvent event) throws IOException {
         try {
-            new IzvjestajBrojila().showReport(dao.getConnection());
+            new ReportCounters().showReport(dao.getConnection());
         } catch (JRException e1) {
             e1.printStackTrace();
         }
@@ -129,9 +127,22 @@ public class AdminController {
 
     public void izvjestajKorisniciAction(ActionEvent event) throws IOException {
         try {
-            new IzvjestajKorisnici().showReport(dao.getConnection());
+            new ReportUsers().showReport(dao.getConnection());
         } catch (JRException e1) {
             e1.printStackTrace();
         }
+    }
+
+    public void akcijaKraj(ActionEvent actionEvent) {
+        System.exit(0);
+    }
+
+    public void akcijaAbout(ActionEvent actionEvent) throws IOException {
+        Stage myStage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/about.fxml"));
+        myStage.setTitle("About");
+        myStage.setScene(new Scene(root, USE_PREF_SIZE, USE_PREF_SIZE));
+        myStage.show();
+
     }
 }

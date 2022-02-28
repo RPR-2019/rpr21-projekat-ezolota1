@@ -18,7 +18,7 @@ import java.util.ResourceBundle;
 import static javafx.scene.layout.Region.USE_PREF_SIZE;
 
 public class EmployeesController implements Initializable {
-    private PlinDAO dao;
+    private GasDAO dao;
     public TextField fldText;
     public Label pozdravLabel, brojBrojilaLabel;
     private String korisnickoIme;
@@ -37,7 +37,7 @@ public class EmployeesController implements Initializable {
 
     public EmployeesController(String korisnickoIme, ObservableList<Integer> brojila) {
         this.korisnickoIme=korisnickoIme;
-        dao = PlinDAO.getInstance();
+        dao = GasDAO.getInstance();
         this.brojila=brojila;
     }
 

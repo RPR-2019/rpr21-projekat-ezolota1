@@ -44,13 +44,13 @@
         </GridPane>
     </left>
     <center>
-        <VBox prefHeight="206.0" prefWidth="155.0" spacing="10.0" BorderPane.alignment="CENTER">
+        <VBox alignment="CENTER" prefHeight="206.0" prefWidth="155.0" spacing="10.0" BorderPane.alignment="CENTER">
             <children>
                 <Label fx:id="pozdravLabel" alignment="TOP_CENTER" contentDisplay="CENTER" text="Pozdrav!" />
                 <HBox spacing="5.0">
                     <children>
-                        <Label fx:id="brojBrojilaLabel" prefWidth="79.0" text="%brojBrojila" />
-                        <ChoiceBox fx:id="brojilaChoice" prefHeight="26.0" prefWidth="67.0" />
+                        <Label fx:id="brojBrojilaLabel" text="%brojBrojila" />
+                        <ChoiceBox fx:id="brojilaChoice" prefHeight="26.0" prefWidth="85.0" />
                     </children>
                 </HBox>
                 <TextField fx:id="fldText" editable="false" maxWidth="-Infinity" prefWidth="150.0" />

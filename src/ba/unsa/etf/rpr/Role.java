@@ -1,6 +1,6 @@
 package ba.unsa.etf.rpr;
 
-public enum Uloga {
+public enum Role {
     POTROSAC, POPISIVAC, ADMIN;
 
     @Override

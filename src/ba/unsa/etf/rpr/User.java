@@ -1,10 +1,10 @@
 package ba.unsa.etf.rpr;
 
-public class Korisnik {
+public class User {
     private int id;
     private String ime, prezime;
     String korisnickoIme, lozinka;
-    private Uloga uloga;
+    private Role uloga;
 
     public String getKorisnickoIme() {
         return korisnickoIme;
@@ -22,7 +22,7 @@ public class Korisnik {
         this.lozinka = lozinka;
     }
 
-    public Korisnik(int id, String ime, String prezime, String korisnickoIme, String lozinka, Uloga uloga) {
+    public User(int id, String ime, String prezime, String korisnickoIme, String lozinka, Role uloga) {
         this.id = id;
         this.ime = ime;
         this.prezime = prezime;
@@ -31,7 +31,7 @@ public class Korisnik {
         this.lozinka=lozinka;
     }
 
-    public Korisnik(String ime, String prezime, String korisnickoIme, String lozinka, Uloga uloga) {
+    public User(String ime, String prezime, String korisnickoIme, String lozinka, Role uloga) {
         this.ime = ime;
         this.prezime = prezime;
         this.uloga=uloga;
@@ -63,11 +63,11 @@ public class Korisnik {
         this.prezime = prezime;
     }
 
-    public Uloga getUloga() {
+    public Role getUloga() {
         return uloga;
     }
 
-    public void setUloga(Uloga uloga) {
+    public void setUloga(Role uloga) {
         this.uloga = uloga;
     }
 

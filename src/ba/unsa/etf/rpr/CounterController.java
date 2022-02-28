@@ -7,20 +7,18 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
 
-public class BrojiloController {
+public class CounterController {
     public TextField fldSifra, fldHod;
-    public Brojilo brojilo;
-    public ChoiceBox<Korisnik> choiceKorisnik;
+    public Counter brojilo;
+    public ChoiceBox<User> choiceKorisnik;
 
-    ObservableList<Korisnik> korisnici= FXCollections.observableArrayList();
+    ObservableList<User> korisnici= FXCollections.observableArrayList();
     private boolean iznosIspravan=false;
 
 
-    public BrojiloController(ArrayList<Korisnik> korisnici) {
+    public CounterController(ArrayList<User> korisnici) {
         this.korisnici.addAll(korisnici);
     }
 
@@ -47,12 +45,12 @@ public class BrojiloController {
             iznosIspravan=true;
         }
         if(iznosIspravan) {
-            brojilo=new Brojilo(Integer.parseInt(fldSifra.getText()), 0, fldHod.getText(), choiceKorisnik.getSelectionModel().getSelectedItem(), false);
+            brojilo=new Counter(Integer.parseInt(fldSifra.getText()), 0, fldHod.getText(), choiceKorisnik.getSelectionModel().getSelectedItem(), false);
             Stage stage = (Stage) fldHod.getScene().getWindow();
             stage.close();
         }
 
     }
 
-    public Brojilo getBrojilo() { return brojilo; }
+    public Counter getBrojilo() { return brojilo; }
 }

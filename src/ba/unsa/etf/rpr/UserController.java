@@ -1,26 +1,19 @@
 package ba.unsa.etf.rpr;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
-
-public class KorisnikController {
+public class UserController {
     public TextField fldIme, fldPrezime, fldKorisnickoIme, fldLozinka;
-    public Korisnik korisnik;
+    public User korisnik;
 
     public CheckBox popisivac;
     private boolean ispravnost=false;
 
 
-    public KorisnikController() {}
+    public UserController() {}
 
 
     public void cancelAction(ActionEvent event) {
@@ -59,13 +52,13 @@ public class KorisnikController {
             ispravnost=true;
         }
         if(ispravnost) {
-            korisnik=new Korisnik(fldIme.getText(), fldPrezime.getText(), fldKorisnickoIme.getText(), fldLozinka.getText(), Uloga.POTROSAC);
-            if(popisivac.isSelected()) korisnik.setUloga(Uloga.POPISIVAC);
+            korisnik=new User(fldIme.getText(), fldPrezime.getText(), fldKorisnickoIme.getText(), fldLozinka.getText(), Role.POTROSAC);
+            if(popisivac.isSelected()) korisnik.setUloga(Role.POPISIVAC);
             Stage stage = (Stage) fldIme.getScene().getWindow();
             stage.close();
         }
 
     }
 
-    public Korisnik getKorisnik() { return korisnik; }
+    public User getKorisnik() { return korisnik; }
 }

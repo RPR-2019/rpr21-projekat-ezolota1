@@ -3,19 +3,40 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
     <center>
-        <TableView fx:id="tableViewRacuni" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="556.0" BorderPane.alignment="CENTER">
-            <columns>
-                <TableColumn fx:id="colRacunid" prefWidth="61.19999539852142" text="ID" />
-                <TableColumn fx:id="colRacunIznos" prefWidth="65.80000305175781" text="Iznos" />
-                <TableColumn fx:id="colRacunMjesec" minWidth="3.20001220703125" prefWidth="92.19998168945312" text="Mjesec" />
-                <TableColumn fx:id="colRacunGodina" maxWidth="1.7976931348623157E308" minWidth="0.0" prefWidth="93.79998779296875" text="Godina" />
-                <TableColumn fx:id="colRacunBrojilo" minWidth="3.20001220703125" prefWidth="94.60000610351562" text="Brojilo" />
-                <TableColumn fx:id="colRacunPlacen" minWidth="3.20001220703125" prefWidth="61.600018310546886" text="Plaćen" />
-            </columns>
-        </TableView>
+      <VBox BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Dobrodošli u Sarajevo-gas Admin panel!">
+               <padding>
+                  <Insets bottom="5.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="10.0" text="Pregled svih računa i informacija o tome da li je izvršena uplata:">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
+               </padding>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+              <TableView fx:id="tableViewRacuni" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="556.0" VBox.vgrow="ALWAYS">
+                  <columns>
+                      <TableColumn fx:id="colRacunid" prefWidth="61.19999539852142" text="ID" />
+                      <TableColumn fx:id="colRacunIznos" prefWidth="65.80000305175781" text="Iznos" />
+                      <TableColumn fx:id="colRacunMjesec" minWidth="3.20001220703125" prefWidth="92.19998168945312" text="Mjesec" />
+                      <TableColumn fx:id="colRacunGodina" maxWidth="1.7976931348623157E308" minWidth="0.0" prefWidth="93.79998779296875" text="Godina" />
+                      <TableColumn fx:id="colRacunBrojilo" minWidth="3.20001220703125" prefWidth="94.60000610351562" text="Brojilo" />
+                      <TableColumn fx:id="colRacunPlacen" minWidth="3.20001220703125" prefWidth="61.600018310546886" text="Plaćen" />
+                  </columns>
+              </TableView>
+         </children>
+      </VBox>
     </center>
     <right>
         <VBox prefHeight="400.0" prefWidth="127.0" spacing="5.0" BorderPane.alignment="CENTER">
@@ -32,4 +53,21 @@
             </padding>
         </VBox>
     </right>
+    <top>
+        <MenuBar BorderPane.alignment="CENTER">
+            <menus>
+                <Menu mnemonicParsing="true" text="_File">
+                    <items>
+                        <MenuItem onAction="#akcijaKraj" text="E_xit" />
+                    </items>
+                </Menu>
+
+                <Menu text="_Help">
+                    <items>
+                        <MenuItem onAction="#akcijaAbout" text="_About" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
 </BorderPane>

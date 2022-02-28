@@ -1,16 +1,14 @@
 package ba.unsa.etf.rpr;
 
-import java.util.Date;
-
-public class Racun {
+public class Bill {
     private int id;
     private String novacZaUplatu;
-    private Brojilo brojilo;
+    private Counter brojilo;
     private String mjesec;
     private int godina;
     private boolean placen;
 
-    public Racun(int id, String novacZaUplatu, String mjesec, int godina, Brojilo brojilo, int placen) {
+    public Bill(int id, String novacZaUplatu, String mjesec, int godina, Counter brojilo, int placen) {
         this.id = id;
         this.novacZaUplatu = novacZaUplatu;
         this.brojilo = brojilo;
@@ -20,7 +18,7 @@ public class Racun {
         else this.placen=false;
     }
 
-    public Racun(String novacZaUplatu, Brojilo brojilo, String mjesec, int godina, boolean placen) {
+    public Bill(String novacZaUplatu, Counter brojilo, String mjesec, int godina, boolean placen) {
         this.novacZaUplatu = novacZaUplatu;
         this.brojilo = brojilo;
         this.mjesec = mjesec;
@@ -44,11 +42,11 @@ public class Racun {
         this.novacZaUplatu = novacZaUplatu;
     }
 
-    public Brojilo getBrojilo() {
+    public Counter getBrojilo() {
         return brojilo;
     }
 
-    public void setBrojilo(Brojilo brojilo) {
+    public void setBrojilo(Counter brojilo) {
         this.brojilo = brojilo;
     }
 

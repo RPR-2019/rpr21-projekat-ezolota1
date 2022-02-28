@@ -8,9 +8,9 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class IzvjestajKorisnici extends JFrame {
+public class ReportCounters extends JFrame {
     public void showReport(Connection conn) throws JRException {
-        String reportSrcFile = getClass().getResource("/reports/users.jrxml").getFile();
+        String reportSrcFile = getClass().getResource("/reports/counters.jrxml").getFile();
         String reportsDir = getClass().getResource("/reports/").getFile();
 
         JasperReport jasperReport = JasperCompileManager.compileReport(reportSrcFile);
@@ -24,3 +24,4 @@ public class IzvjestajKorisnici extends JFrame {
         viewer.setVisible(true);
     }
 }
+

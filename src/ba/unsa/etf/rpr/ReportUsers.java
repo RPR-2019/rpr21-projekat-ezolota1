@@ -8,20 +8,15 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class IzvjestajPosljRacun extends JFrame {
-    private String brojilo;
-
-    public void setBrojilo(String brojilo) { this.brojilo=brojilo; }
-
+public class ReportUsers extends JFrame {
     public void showReport(Connection conn) throws JRException {
-        String reportSrcFile = getClass().getResource("/reports/posljRacun.jrxml").getFile();
+        String reportSrcFile = getClass().getResource("/reports/users.jrxml").getFile();
         String reportsDir = getClass().getResource("/reports/").getFile();
 
         JasperReport jasperReport = JasperCompileManager.compileReport(reportSrcFile);
         // Fields for resources path
         HashMap<String, Object> parameters = new HashMap<String, Object>();
         parameters.put("reportsDirPath", reportsDir);
-        parameters.put("brojilo", brojilo);
         ArrayList<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
         list.add(parameters);
         JasperPrint print = JasperFillManager.fillReport(jasperReport, parameters, conn);

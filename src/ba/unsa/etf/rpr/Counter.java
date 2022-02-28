@@ -1,15 +1,15 @@
 package ba.unsa.etf.rpr;
 
-public class Brojilo {
+public class Counter {
     private int sifraBrojila;
     private int trenutnoStanje;
     private String hod;
-    private Korisnik vlasnik;
+    private User vlasnik;
     private boolean ocitano;
 
-    public Brojilo() {}
+    public Counter() {}
 
-    public Brojilo(int sifraBrojila, int trenutnoStanje, String hod, Korisnik vlasnik, boolean ocitano) {
+    public Counter(int sifraBrojila, int trenutnoStanje, String hod, User vlasnik, boolean ocitano) {
         this.sifraBrojila = sifraBrojila;
         this.trenutnoStanje = trenutnoStanje;
         this.hod = hod;
@@ -17,7 +17,7 @@ public class Brojilo {
         this.ocitano = ocitano;
     }
 
-    public Brojilo(int sifraBrojila, int trenutnoStanje, String hod, int ocitano) {
+    public Counter(int sifraBrojila, int trenutnoStanje, String hod, int ocitano) {
         this.sifraBrojila = sifraBrojila;
         this.trenutnoStanje = trenutnoStanje;
         this.hod=hod;
@@ -49,11 +49,11 @@ public class Brojilo {
         this.hod = hod;
     }
 
-    public Korisnik getVlasnik() {
+    public User getVlasnik() {
         return vlasnik;
     }
 
-    public void setVlasnik(Korisnik vlasnik) {
+    public void setVlasnik(User vlasnik) {
         this.vlasnik = vlasnik;
     }
 
