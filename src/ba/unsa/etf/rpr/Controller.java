@@ -80,21 +80,26 @@ public class Controller implements Initializable {
     }
 
     public void dugovanjaAction(ActionEvent event) {
-        ArrayList<Bill> dugovanja=dao.dugovanja(brojilaChoice.getSelectionModel().getSelectedItem());
-        if(dugovanja.isEmpty()) {
+        try {
+            ArrayList<Bill> dugovanja = dao.dugovanja(brojilaChoice.getSelectionModel().getSelectedItem());
+            if (dugovanja.isEmpty()) {
+                throw new NoDeptsException("Nepostojeća dugovanja");
+
+            } else {
+                ReportDepts r = new ReportDepts();
+                r.setBrojilo(brojilaChoice.getSelectionModel().getSelectedItem().toString());
+                try {
+                    r.showReport(dao.getConnection());
+                } catch (JRException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        } catch(NoDeptsException e) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Nepostojeća dugovanja");
             alert.setHeaderText("Trenutno nemate nikakvih dugovanja");
 
             alert.show();
-        } else {
-            ReportDepts r=new ReportDepts();
-            r.setBrojilo(brojilaChoice.getSelectionModel().getSelectedItem().toString());
-            try {
-                r.showReport(dao.getConnection());
-            } catch (JRException e1) {
-                e1.printStackTrace();
-            }
         }
     }
 
