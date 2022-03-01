@@ -1,6 +1,6 @@
 package ba.unsa.etf.rpr;
 
-public class User {
+public abstract class User {
     private int id;
     private String ime, prezime;
     String korisnickoIme, lozinka;

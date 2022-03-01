@@ -52,8 +52,9 @@ public class UserController {
             ispravnost=true;
         }
         if(ispravnost) {
-            korisnik=new User(fldIme.getText(), fldPrezime.getText(), fldKorisnickoIme.getText(), fldLozinka.getText(), Role.POTROSAC);
-            if(popisivac.isSelected()) korisnik.setUloga(Role.POPISIVAC);
+            if(popisivac.isSelected()) korisnik=new Employee(fldIme.getText(), fldPrezime.getText(), fldKorisnickoIme.getText(), fldLozinka.getText(), Role.POPISIVAC);
+            else korisnik=new Consumer(fldIme.getText(), fldPrezime.getText(), fldKorisnickoIme.getText(), fldLozinka.getText(), Role.POTROSAC);
+
             Stage stage = (Stage) fldIme.getScene().getWindow();
             stage.close();
         }

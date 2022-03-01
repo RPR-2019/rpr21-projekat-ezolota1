@@ -84,9 +84,18 @@ public class GasDAO {
             ps.setString(1, korisnickoIme);
             ResultSet rs = ps.executeQuery();
             if(!rs.next()) return null;
-            User korisnik = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), Role.POTROSAC);
-            if(rs.getString(6).equals("POPISIVAC")) korisnik.setUloga(Role.POPISIVAC);
-            if(rs.getString(6).equals("ADMIN")) korisnik.setUloga(Role.ADMIN);
+
+            if(rs.getString(6).equals("POPISIVAC")) {
+                Employee e=new Employee(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), Role.POTROSAC);
+                e.setUloga(Role.POPISIVAC);
+                return e;
+            }
+            if(rs.getString(6).equals("ADMIN")) {
+                Admin e=new Admin(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), Role.POTROSAC);
+                e.setUloga(Role.ADMIN);
+                return e;
+            }
+            Consumer korisnik = new Consumer(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), Role.POTROSAC);
             return korisnik;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -242,7 +251,7 @@ public class GasDAO {
             dajKorisnikeStatement.setString(1, "POTROSAC");
             ResultSet rs=dajKorisnikeStatement.executeQuery();
             while(rs.next()) {
-                User k=new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), Role.POTROSAC);
+                Consumer k=new Consumer(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), Role.POTROSAC);
                 korisnici.add(k);
             }
         } catch (SQLException e) {
