@@ -111,6 +111,7 @@ public class Controller implements Initializable {
         Stage myStage = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/about.fxml"));
         myStage.setTitle("About");
+        myStage.setResizable(false);
         myStage.setScene(new Scene(root, USE_PREF_SIZE, USE_PREF_SIZE));
         myStage.show();
 
