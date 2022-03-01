@@ -167,7 +167,7 @@ public class GasDAO {
 
                 Bill racun=new Bill(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), null, rs.getInt(6));
                 Counter brojilo=dajBrojilo(rs.getInt(5));
-                racun.setBrojilo(brojilo);
+                racun.setCounter(brojilo);
                 racuni.add(racun);
 
             }
@@ -196,11 +196,11 @@ public class GasDAO {
     public void dodajRacun(Bill r) {
         try {
             dodajRacunStatement.setInt(1, r.getId());
-            dodajRacunStatement.setString(2, r.getNovacZaUplatu());
-            dodajRacunStatement.setString(3, r.getMjesec());
-            dodajRacunStatement.setInt(4, r.getGodina());
-            dodajRacunStatement.setInt(5, r.getBrojilo().getSifraBrojila());
-            if(r.isPlacen()) dodajRacunStatement.setInt(6, 1);
+            dodajRacunStatement.setString(2, r.getMoneyToPay());
+            dodajRacunStatement.setString(3, r.getMonth());
+            dodajRacunStatement.setInt(4, r.getYear());
+            dodajRacunStatement.setInt(5, r.getCounter().getSifraBrojila());
+            if(r.isPaid()) dodajRacunStatement.setInt(6, 1);
             else dodajRacunStatement.setInt(6, 0);
             dodajRacunStatement.executeUpdate();
         } catch (SQLException e) {
@@ -283,7 +283,7 @@ public class GasDAO {
             while(rs.next()) {
                 Bill racun=new Bill(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), null, rs.getInt(6));
                 Counter brojilo=dajBrojilo(rs.getInt(5));
-                racun.setBrojilo(brojilo);
+                racun.setCounter(brojilo);
                 dugovanja.add(racun);
             }
         } catch (SQLException e) {
