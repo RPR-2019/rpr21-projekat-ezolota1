@@ -150,12 +150,12 @@ public class GasDAO {
         dajBrojiloStatement.setInt(1, sifra);
         ResultSet rs=dajBrojiloStatement.executeQuery();
         if(!rs.next()) return null;
-        brojilo.setSifraBrojila(rs.getInt(1));
-        brojilo.setTrenutnoStanje(rs.getInt(2));
-        brojilo.setHod(rs.getString(3));
+        brojilo.setCounterCode(rs.getInt(1));
+        brojilo.setCurrentState(rs.getInt(2));
+        brojilo.setWalk(rs.getString(3));
         //brojilo.setVlasnik(null);
-        if(rs.getInt(5)==1) brojilo.setOcitano(true);
-        else brojilo.setOcitano(false);
+        if(rs.getInt(5)==1) brojilo.setRead(true);
+        else brojilo.setRead(false);
         return brojilo;
     }
 
@@ -199,7 +199,7 @@ public class GasDAO {
             dodajRacunStatement.setString(2, r.getMoneyToPay());
             dodajRacunStatement.setString(3, r.getMonth());
             dodajRacunStatement.setInt(4, r.getYear());
-            dodajRacunStatement.setInt(5, r.getCounter().getSifraBrojila());
+            dodajRacunStatement.setInt(5, r.getCounter().getCounterCode());
             if(r.isPaid()) dodajRacunStatement.setInt(6, 1);
             else dodajRacunStatement.setInt(6, 0);
             dodajRacunStatement.executeUpdate();
@@ -262,10 +262,10 @@ public class GasDAO {
 
     public void dodajBrojilo(Counter b) {
         try {
-            dodajBrojiloStatement.setInt(1, b.getSifraBrojila());
-            dodajBrojiloStatement.setInt(2, b.getTrenutnoStanje());
-            dodajBrojiloStatement.setString(3, b.getHod());
-            dodajBrojiloStatement.setInt(4, b.getVlasnik().getId());
+            dodajBrojiloStatement.setInt(1, b.getCounterCode());
+            dodajBrojiloStatement.setInt(2, b.getCurrentState());
+            dodajBrojiloStatement.setString(3, b.getWalk());
+            dodajBrojiloStatement.setInt(4, b.getOwner().getId());
             dodajBrojiloStatement.setInt(5, 0);
 
             dodajBrojiloStatement.executeUpdate();
