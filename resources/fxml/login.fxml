@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<GridPane hgap="5.0" prefHeight="144.0" prefWidth="266.0" vgap="5.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.LoginController">
+<GridPane hgap="5.0" maxWidth="1.7976931348623157E308" prefHeight="144.0" prefWidth="266.0" vgap="5.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.LoginController">
    <stylesheets>
       <URL value="@/css/validation.css" />
    </stylesheets>
@@ -23,16 +23,16 @@
       <RowConstraints />
    </rowConstraints>
    <children>
-      <Label text="Aplikacija za popisivanje plina" GridPane.columnSpan="2" />
-      <Label text="Molimo da unesete svoje korisničko ime i lozinku." GridPane.columnSpan="2" GridPane.rowIndex="1">
+      <Label text="Aplikacija za popisivanje plina" GridPane.columnSpan="2" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS" />
+      <Label text="Molimo da unesete svoje korisničko ime i lozinku." GridPane.columnSpan="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
          <font>
             <Font size="10.0" />
          </font>
       </Label>
-      <Label prefHeight="18.0" prefWidth="137.0" text="Korisničko ime: " GridPane.rowIndex="2" />
-      <TextField fx:id="korisnickoImeFld" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-      <Label text="Lozinka: " GridPane.rowIndex="3" />
-      <PasswordField fx:id="lozinkaFld" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      <Label prefHeight="18.0" prefWidth="137.0" text="Korisničko ime: " GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS" />
+      <TextField fx:id="korisnickoImeFld" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS" />
+      <Label text="Lozinka: " GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.vgrow="ALWAYS" />
+      <PasswordField fx:id="lozinkaFld" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.vgrow="ALWAYS" />
       <Button fx:id="loginBtn" mnemonicParsing="false" onAction="#loginAction" text="Login" GridPane.columnIndex="1" GridPane.rowIndex="4" />
    </children>
    <opaqueInsets>
