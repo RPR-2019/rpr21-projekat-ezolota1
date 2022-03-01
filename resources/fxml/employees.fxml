@@ -47,7 +47,7 @@
         <VBox alignment="CENTER" prefHeight="206.0" prefWidth="155.0" spacing="10.0" BorderPane.alignment="CENTER">
             <children>
                 <Label fx:id="pozdravLabel" alignment="TOP_CENTER" contentDisplay="CENTER" text="Pozdrav!" />
-                <HBox spacing="5.0">
+                <HBox alignment="CENTER" spacing="5.0">
                     <children>
                         <Label fx:id="brojBrojilaLabel" text="%brojBrojila" />
                         <ChoiceBox fx:id="brojilaChoice" prefHeight="26.0" prefWidth="85.0" />
@@ -74,6 +74,7 @@
 
                 <Menu text="_Help">
                     <items>
+                        <MenuItem onAction="#akcijaInstructions" text="_Instructions" />
                         <MenuItem onAction="#akcijaAbout" text="_About" />
                     </items>
                 </Menu>

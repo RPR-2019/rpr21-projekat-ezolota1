@@ -75,6 +75,7 @@
 
             <Menu text="_Help">
                <items>
+                  <MenuItem onAction="#akcijaInstructions" text="_Instructions" />
                   <MenuItem onAction="#akcijaAbout" text="_About" />
                </items>
             </Menu>

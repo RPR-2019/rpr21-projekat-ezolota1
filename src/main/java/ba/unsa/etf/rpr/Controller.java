@@ -117,6 +117,17 @@ public class Controller implements Initializable {
 
     }
 
+    public void akcijaInstructions(ActionEvent actionEvent) throws IOException {
+        Stage myStage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/instructions.fxml"));
+        myStage.setTitle("Uputstva");
+        myStage.setMinHeight(400);
+        myStage.setMinWidth(300);
+        myStage.setScene(new Scene(root, USE_PREF_SIZE, USE_PREF_SIZE));
+        myStage.show();
+
+    }
+
 
     public void akcijaBosanski(ActionEvent actionEvent) {
 

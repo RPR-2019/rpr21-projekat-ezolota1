@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane prefHeight="398.0" prefWidth="444.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
+   <columnConstraints>
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+      <RowConstraints />
+   </rowConstraints>
+   <children>
+      <Label prefHeight="42.0" prefWidth="262.0" text="Uputstvo za potrošače i popisivače:">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Label>
+      <TextArea prefHeight="380.0" prefWidth="444.0" text="Potrošači&#10;- Sa lijeve strane ekrana možete ukucati potrošnju Vašeg brojila za tekući mjesec.&#10;Sarajevo-gas će zadnja dva dana u mjesecu provjeriti da li je Vaše brojilo očitano. &#10;Ako imate više brojila, željeno brojilo možete odabrati u izborniku sa desne strane.&#10;- Kada ukucate stanje Vašeg brojila, provjerite u pravougaoniku sa desne strane&#10;da li je ispravan unos. Ako je sve u redu, pošaljite stanje klikom na dugme&#10;&quot;Potvrdi potrošnju&quot;.&#10;- Ukoliko želite da vidite ili isprintate Vaš posljednji račun, to možete&#10;klikom na drugo dugme &quot;Posljednji račun&quot;.&#10;- Ukoliko želite da provjerite postojanje duga, to možete klikom na treće &#10;dugme &quot;Dugovanja&quot;.&#10;Ako budete imali nekih nejasnoća, slobodno nas kontaktirajte na email.&#10;Hvala Vam na povjerenju!&#10;&#10;Popisivači&#10;- Prvo odaberite neočitano brojilo koje želite očitati sa izbornika sa desne strane&#10;ekrana.&#10;- Nakon toga na lijevoj strani ekrana možete očitati označeno brojilo.&#10;- Klikom na dugme &quot;Potvrdi potrošnju&quot; očitavate brojilo.&#10;Ako budete imali nekih nejasnoća, slobodno nas kontaktirajte na email.&#10;Hvala Vam i sretno!&#10;" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" />
+   </children>
+</GridPane>
