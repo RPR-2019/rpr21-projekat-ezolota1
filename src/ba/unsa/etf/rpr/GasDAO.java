@@ -87,12 +87,12 @@ public class GasDAO {
 
             if(rs.getString(6).equals("POPISIVAC")) {
                 Employee e=new Employee(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), Role.POTROSAC);
-                e.setUloga(Role.POPISIVAC);
+                e.setRole(Role.POPISIVAC);
                 return e;
             }
             if(rs.getString(6).equals("ADMIN")) {
                 Admin e=new Admin(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), Role.POTROSAC);
-                e.setUloga(Role.ADMIN);
+                e.setRole(Role.ADMIN);
                 return e;
             }
             Consumer korisnik = new Consumer(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), Role.POTROSAC);
@@ -233,11 +233,11 @@ public class GasDAO {
     public void dodajKorisnika(User k) {
         try {
             dodajKorisnikaStatement.setInt(1, k.getId());
-            dodajKorisnikaStatement.setString(2, k.getIme());
-            dodajKorisnikaStatement.setString(3, k.getPrezime());
-            dodajKorisnikaStatement.setString(4, k.getKorisnickoIme());
-            dodajKorisnikaStatement.setString(5, k.getLozinka());
-            if(k.getUloga().equals(Role.POTROSAC)) dodajKorisnikaStatement.setString(6, "POTROSAC");
+            dodajKorisnikaStatement.setString(2, k.getName());
+            dodajKorisnikaStatement.setString(3, k.getLastName());
+            dodajKorisnikaStatement.setString(4, k.getUsername());
+            dodajKorisnikaStatement.setString(5, k.getPassword());
+            if(k.getRole().equals(Role.POTROSAC)) dodajKorisnikaStatement.setString(6, "POTROSAC");
             else dodajKorisnikaStatement.setString(6, "POPISIVAC");
             dodajKorisnikaStatement.executeUpdate();
         } catch (SQLException e) {

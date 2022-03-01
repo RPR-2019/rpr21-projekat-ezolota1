@@ -77,7 +77,7 @@ public class LoginController {
             alert.showAndWait();
             return false;
         }
-        if(!k.getLozinka().equals(lozinkaFld.getText())) {
+        if(!k.getPassword().equals(lozinkaFld.getText())) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Greška");
             alert.setHeaderText("Pogrešna lozinka");
@@ -94,7 +94,7 @@ public class LoginController {
 
             Stage myStage = new Stage();
             Parent p=null;
-            if(k.getUloga().equals(Role.POTROSAC)) {
+            if(k.getRole().equals(Role.POTROSAC)) {
                 ResourceBundle bundle = ResourceBundle.getBundle("Translation_bs");
                 FXMLLoader ldr = new FXMLLoader( getClass().getResource(
                         "/fxml/consumers.fxml"), bundle);
@@ -108,7 +108,7 @@ public class LoginController {
                 p = (Parent) ldr.load();
                 myStage.setMinHeight(300);
                 myStage.setMinWidth(350);
-            } else if(k.getUloga().equals(Role.POPISIVAC)) {
+            } else if(k.getRole().equals(Role.POPISIVAC)) {
                 ResourceBundle bundle = ResourceBundle.getBundle("Translation_bs");
                 FXMLLoader ldr = new FXMLLoader( getClass().getResource(
                         "/fxml/employees.fxml"), bundle);

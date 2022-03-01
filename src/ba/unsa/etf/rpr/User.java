@@ -2,41 +2,41 @@ package ba.unsa.etf.rpr;
 
 public abstract class User {
     private int id;
-    private String ime, prezime;
-    String korisnickoIme, lozinka;
-    private Role uloga;
+    private String name, lastName;
+    String username, password;
+    private Role role;
 
-    public String getKorisnickoIme() {
-        return korisnickoIme;
+    public String getUsername() {
+        return username;
     }
 
-    public void setKorisnickoIme(String korisnickoIme) {
-        this.korisnickoIme = korisnickoIme;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getLozinka() {
-        return lozinka;
+    public String getPassword() {
+        return password;
     }
 
-    public void setLozinka(String lozinka) {
-        this.lozinka = lozinka;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public User(int id, String ime, String prezime, String korisnickoIme, String lozinka, Role uloga) {
         this.id = id;
-        this.ime = ime;
-        this.prezime = prezime;
-        this.uloga=uloga;
-        this.korisnickoIme=korisnickoIme;
-        this.lozinka=lozinka;
+        this.name = ime;
+        this.lastName = prezime;
+        this.role =uloga;
+        this.username =korisnickoIme;
+        this.password =lozinka;
     }
 
     public User(String ime, String prezime, String korisnickoIme, String lozinka, Role uloga) {
-        this.ime = ime;
-        this.prezime = prezime;
-        this.uloga=uloga;
-        this.korisnickoIme=korisnickoIme;
-        this.lozinka=lozinka;
+        this.name = ime;
+        this.lastName = prezime;
+        this.role =uloga;
+        this.username =korisnickoIme;
+        this.password =lozinka;
     }
 
     public int getId() {
@@ -47,32 +47,32 @@ public abstract class User {
         this.id = id;
     }
 
-    public String getIme() {
-        return ime;
+    public String getName() {
+        return name;
     }
 
-    public void setIme(String ime) {
-        this.ime = ime;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getPrezime() {
-        return prezime;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setPrezime(String prezime) {
-        this.prezime = prezime;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public Role getUloga() {
-        return uloga;
+    public Role getRole() {
+        return role;
     }
 
-    public void setUloga(Role uloga) {
-        this.uloga = uloga;
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     @Override
     public String toString() {
-        return id + ", " + ime + " " + prezime;
+        return id + ", " + name + " " + lastName;
     }
 }
